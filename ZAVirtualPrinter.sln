@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UMDF 2 Driver1", "UMDF 2 Driver1\UMDF 2 Driver1.vcxproj", "{2DCF490F-5A84-B217-A83D-C040A690C528}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZAVirtualPrinter", "ZAVirtualPrinter\ZAVirtualPrinter.vcxproj", "{2DCF490F-5A84-B217-A83D-C040A690C528}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
