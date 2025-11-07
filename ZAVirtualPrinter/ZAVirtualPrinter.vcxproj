@@ -105,21 +105,121 @@
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
     </DriverSign>
+    <PostBuildEvent>
+      <Command>@echo off
+echo ========================================
+echo Post-Build: Copying batch scripts
+echo ========================================
+echo Configuration: $(Configuration)
+echo Platform: $(Platform)
+echo Target Directory: $(SolutionDir)$(Platform)\$(Configuration)\
+echo.
+
+if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
+    echo Creating output directory...
+    mkdir "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
+echo Copying batch files...
+xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+if %errorlevel% equ 0 (
+    echo [OK] Batch scripts copied successfully
+) else (
+    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+)
+echo.</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
     </DriverSign>
+    <PostBuildEvent>
+      <Command>@echo off
+echo ========================================
+echo Post-Build: Copying batch scripts
+echo ========================================
+echo Configuration: $(Configuration)
+echo Platform: $(Platform)
+echo Target Directory: $(SolutionDir)$(Platform)\$(Configuration)\
+echo.
+
+if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
+    echo Creating output directory...
+    mkdir "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
+echo Copying batch files...
+xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+if %errorlevel% equ 0 (
+    echo [OK] Batch scripts copied successfully
+) else (
+    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+)
+echo.</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
     </DriverSign>
+    <PostBuildEvent>
+      <Command>@echo off
+echo ========================================
+echo Post-Build: Copying batch scripts
+echo ========================================
+echo Configuration: $(Configuration)
+echo Platform: $(Platform)
+echo Target Directory: $(SolutionDir)$(Platform)\$(Configuration)\
+echo.
+
+if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
+    echo Creating output directory...
+    mkdir "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
+echo Copying batch files...
+xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+if %errorlevel% equ 0 (
+    echo [OK] Batch scripts copied successfully
+) else (
+    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+)
+echo.</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
     </DriverSign>
+    <PostBuildEvent>
+      <Command>@echo off
+echo ========================================
+echo Post-Build: Copying batch scripts
+echo ========================================
+echo Configuration: $(Configuration)
+echo Platform: $(Platform)
+echo Target Directory: $(SolutionDir)$(Platform)\$(Configuration)\
+echo.
+
+if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
+    echo Creating output directory...
+    mkdir "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
+echo Copying batch files...
+xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+if %errorlevel% equ 0 (
+    echo [OK] Batch scripts copied successfully
+) else (
+    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+)
+echo.</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(TargetPath)" />
@@ -137,6 +237,11 @@
     <ClCompile Include="Queue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Check-Prerequisites.bat" />
+    <None Include="Enable-TestSigning.bat" />
+    <None Include="Install-Driver.bat" />
+    <None Include="Sign-Driver.bat" />
+    <None Include="Uninstall-Driver.bat" />
     <None Include="ZAVirtualPrinter.inf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

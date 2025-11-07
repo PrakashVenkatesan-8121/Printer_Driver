@@ -50,5 +50,16 @@
     <None Include="ZAVirtualPrinter.inf">
       <Filter>Driver Files</Filter>
     </None>
+    <None Include="Install-Driver.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Uninstall-Driver.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Enable-TestSigning.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="DRIVER_INSTALLATION.md" />
+    <None Include="INSTALL_QUICK_REF.md" />
   </ItemGroup>
 </Project>
