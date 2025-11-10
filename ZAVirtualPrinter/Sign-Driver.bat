@@ -143,18 +143,6 @@ for /L %%i in (0,1,3) do (
 )
 
 :inf2cat_found
-if not defined INF2CAT_FOUND (
-    echo ERROR: inf2cat.exe not found!
-    echo.
-    echo Please install Windows Driver Kit (WDK)
-    echo Download from: https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk
-    pause
-    exit /b 1
-)
-
-echo Using inf2cat from: %INF2CAT_PATH%
-echo.
-
 "%INF2CAT_PATH%" /driver:"%SCRIPT_DIR%" /os:%OS_VERSION% /verbose
 if %errorLevel% neq 0 (
     echo ERROR: Failed to create catalog file

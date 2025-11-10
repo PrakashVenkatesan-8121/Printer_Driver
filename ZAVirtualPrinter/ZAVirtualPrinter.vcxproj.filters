@@ -59,7 +59,11 @@
     <None Include="Enable-TestSigning.bat">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="DRIVER_INSTALLATION.md" />
-    <None Include="INSTALL_QUICK_REF.md" />
+    <None Include="Sign-Driver.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Check-Prerequisites.bat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

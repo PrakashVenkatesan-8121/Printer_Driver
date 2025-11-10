@@ -108,7 +108,7 @@
     <PostBuildEvent>
       <Command>@echo off
 echo ========================================
-echo Post-Build: Copying batch scripts
+echo Post-Build: Copying driver files
 echo ========================================
 echo Configuration: $(Configuration)
 echo Platform: $(Platform)
@@ -123,10 +123,18 @@ if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
 echo Copying batch files...
 xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
 
+echo Copying INF file...
+xcopy /Y "$(ProjectDir)ZAVirtualPrinter.inf" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+echo Copying certificate file (if exists)...
+if exist "$(ProjectDir)ZAVirtualPrinter.cer" (
+    xcopy /Y "$(ProjectDir)ZAVirtualPrinter.cer" "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
 if %errorlevel% equ 0 (
-    echo [OK] Batch scripts copied successfully
+    echo [OK] All files copied successfully
 ) else (
-    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+    echo [WARNING] Some files may not have been copied
 )
 echo.</Command>
     </PostBuildEvent>
@@ -138,7 +146,7 @@ echo.</Command>
     <PostBuildEvent>
       <Command>@echo off
 echo ========================================
-echo Post-Build: Copying batch scripts
+echo Post-Build: Copying driver files
 echo ========================================
 echo Configuration: $(Configuration)
 echo Platform: $(Platform)
@@ -153,10 +161,18 @@ if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
 echo Copying batch files...
 xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
 
+echo Copying INF file...
+xcopy /Y "$(ProjectDir)ZAVirtualPrinter.inf" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+echo Copying certificate file (if exists)...
+if exist "$(ProjectDir)ZAVirtualPrinter.cer" (
+    xcopy /Y "$(ProjectDir)ZAVirtualPrinter.cer" "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
 if %errorlevel% equ 0 (
-    echo [OK] Batch scripts copied successfully
+    echo [OK] All files copied successfully
 ) else (
-    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+    echo [WARNING] Some files may not have been copied
 )
 echo.</Command>
     </PostBuildEvent>
@@ -168,7 +184,7 @@ echo.</Command>
     <PostBuildEvent>
       <Command>@echo off
 echo ========================================
-echo Post-Build: Copying batch scripts
+echo Post-Build: Copying driver files
 echo ========================================
 echo Configuration: $(Configuration)
 echo Platform: $(Platform)
@@ -183,10 +199,18 @@ if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
 echo Copying batch files...
 xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
 
+echo Copying INF file...
+xcopy /Y "$(ProjectDir)ZAVirtualPrinter.inf" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+echo Copying certificate file (if exists)...
+if exist "$(ProjectDir)ZAVirtualPrinter.cer" (
+    xcopy /Y "$(ProjectDir)ZAVirtualPrinter.cer" "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
 if %errorlevel% equ 0 (
-    echo [OK] Batch scripts copied successfully
+    echo [OK] All files copied successfully
 ) else (
-    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+    echo [WARNING] Some files may not have been copied
 )
 echo.</Command>
     </PostBuildEvent>
@@ -198,7 +222,7 @@ echo.</Command>
     <PostBuildEvent>
       <Command>@echo off
 echo ========================================
-echo Post-Build: Copying batch scripts
+echo Post-Build: Copying driver files
 echo ========================================
 echo Configuration: $(Configuration)
 echo Platform: $(Platform)
@@ -213,10 +237,18 @@ if not exist "$(SolutionDir)$(Platform)\$(Configuration)\" (
 echo Copying batch files...
 xcopy /Y /I "$(ProjectDir)*.bat" "$(SolutionDir)$(Platform)\$(Configuration)\"
 
+echo Copying INF file...
+xcopy /Y "$(ProjectDir)ZAVirtualPrinter.inf" "$(SolutionDir)$(Platform)\$(Configuration)\"
+
+echo Copying certificate file (if exists)...
+if exist "$(ProjectDir)ZAVirtualPrinter.cer" (
+    xcopy /Y "$(ProjectDir)ZAVirtualPrinter.cer" "$(SolutionDir)$(Platform)\$(Configuration)\"
+)
+
 if %errorlevel% equ 0 (
-    echo [OK] Batch scripts copied successfully
+    echo [OK] All files copied successfully
 ) else (
-    echo [WARNING] Error copying batch files (Error: %errorlevel%)
+    echo [WARNING] Some files may not have been copied
 )
 echo.</Command>
     </PostBuildEvent>

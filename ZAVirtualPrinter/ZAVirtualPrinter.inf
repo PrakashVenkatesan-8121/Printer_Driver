@@ -8,52 +8,97 @@ Class       = Printer
 ClassGuid   = {4d36e979-e325-11ce-bfc1-08002be10318}
 Provider    = %ManufacturerName%
 CatalogFile = ZAVirtualPrinter.cat
-DriverVer   = 11/06/2024,1.0.0.0
+DriverVer   = 11/07/2024,1.0.0.1
 PnpLockdown = 1
 
 [Manufacturer]
-%ManufacturerName% = Standard,NT$ARCH$.10.0...22000
+%ManufacturerName% = Standard,NTamd64.10.0...22000,NTx86.10.0...22000,NTARM64.10.0...22000
 
-[Standard.NT$ARCH$.10.0...22000]
+; =================== x64 (AMD64) Architecture ==================================
+[Standard.NTamd64.10.0...22000]
 %DeviceName% = MyDevice_Install, Root\ZAVirtualPrinter
+
+[MyDevice_Install.NTamd64]
+CopyFiles = UMDriverCopy
+Include = wudfrd.inf
+Needs = WUDFRD.NT
+
+[MyDevice_Install.NTamd64.hw]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.HW
+
+[MyDevice_Install.NTamd64.Services]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.Services
+
+[MyDevice_Install.NTamd64.Wdf]
+UmdfService = ZAVirtualPrinter,ZAVirtualPrinter_Install
+UmdfServiceOrder = ZAVirtualPrinter
+UmdfDirectHardwareAccess = AllowDirectHardwareAccess
+
+; =================== x86 Architecture ==================================
+[Standard.NTx86.10.0...22000]
+%DeviceName% = MyDevice_Install_x86, Root\ZAVirtualPrinter
+
+[MyDevice_Install_x86.NTx86]
+CopyFiles = UMDriverCopy
+Include = wudfrd.inf
+Needs = WUDFRD.NT
+
+[MyDevice_Install_x86.NTx86.hw]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.HW
+
+[MyDevice_Install_x86.NTx86.Services]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.Services
+
+[MyDevice_Install_x86.NTx86.Wdf]
+UmdfService = ZAVirtualPrinter,ZAVirtualPrinter_Install
+UmdfServiceOrder = ZAVirtualPrinter
+UmdfDirectHardwareAccess = AllowDirectHardwareAccess
+
+; =================== ARM64 Architecture ==================================
+[Standard.NTARM64.10.0...22000]
+%DeviceName% = MyDevice_Install_ARM64, Root\ZAVirtualPrinter
+
+[MyDevice_Install_ARM64.NTARM64]
+CopyFiles = UMDriverCopy
+Include = wudfrd.inf
+Needs = WUDFRD.NT
+
+[MyDevice_Install_ARM64.NTARM64.hw]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.HW
+
+[MyDevice_Install_ARM64.NTARM64.Services]
+Include = wudfrd.inf
+Needs = WUDFRD.NT.Services
+
+[MyDevice_Install_ARM64.NTARM64.Wdf]
+UmdfService = ZAVirtualPrinter,ZAVirtualPrinter_Install
+UmdfServiceOrder = ZAVirtualPrinter
+UmdfDirectHardwareAccess = AllowDirectHardwareAccess
+
+; =================== Common Sections ==================================
+[ZAVirtualPrinter_Install]
+UmdfLibraryVersion = 2.15.0
+ServiceBinary = %13%\ZAVirtualPrinter.dll
+
+[DestinationDirs]
+DefaultDestDir = 13
+UMDriverCopy = 13
+
+[UMDriverCopy]
+ZAVirtualPrinter.dll
 
 [SourceDisksFiles]
 ZAVirtualPrinter.dll=1
 
 [SourceDisksNames]
-1 = %DiskName%
+1 = %DiskName%,,,
 
-; =================== UMDF Device ==================================
-
-[MyDevice_Install.NT]
-CopyFiles = UMDriverCopy
-Include = wudfrd.inf
-Needs = WUDFRD.NT
-
-[MyDevice_Install.NT.hw]
-Include = wudfrd.inf
-Needs = WUDFRD.NT.HW
-
-[MyDevice_Install.NT.Services]
-Include = wudfrd.inf
-Needs = WUDFRD.NT.Services
-
-[MyDevice_Install.NT.Wdf]
-UmdfService = ZAVirtualPrinter,ZAVirtualPrinter_Install
-UmdfServiceOrder = ZAVirtualPrinter
-
-[ZAVirtualPrinter_Install]
-UmdfLibraryVersion = $UMDFVERSION$ 
-ServiceBinary = %13%\ZAVirtualPrinter.dll
-
-[DestinationDirs]
-UMDriverCopy=13
-
-[UMDriverCopy]
-ZAVirtualPrinter.dll
-
-; =================== Generic ==================================
-
+; =================== Strings ==================================
 [Strings]
 ManufacturerName = "ZA Virtual Printer Manufacturer"
 DiskName = "ZA Virtual Printer Driver Installation Disk"
