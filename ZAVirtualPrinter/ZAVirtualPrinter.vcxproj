@@ -269,11 +269,9 @@ echo.</Command>
     <ClCompile Include="Queue.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Check-Prerequisites.bat" />
-    <None Include="Enable-TestSigning.bat" />
+    <None Include="Check-Status.bat" />
     <None Include="Install-Driver.bat" />
     <None Include="Sign-Driver.bat" />
-    <None Include="Uninstall-Driver.bat" />
     <Inf Include="ZAVirtualPrinter.inf">
       <FileType>Document</FileType>
     </Inf>

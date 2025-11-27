@@ -47,23 +47,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZAVirtualPrinter.inf">
-      <Filter>Driver Files</Filter>
-    </None>
     <None Include="Install-Driver.bat">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="Uninstall-Driver.bat">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="Enable-TestSigning.bat">
       <Filter>Source Files</Filter>
     </None>
     <None Include="Sign-Driver.bat">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Check-Prerequisites.bat">
+    <None Include="Check-Status.bat">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="ZAVirtualPrinter.inf">
+      <Filter>Driver Files</Filter>
+    </Inf>
   </ItemGroup>
 </Project>

@@ -14,9 +14,22 @@ DriverEntry(
     NTSTATUS status;
     WDF_OBJECT_ATTRIBUTES attributes;
 
-    // Initialize WPP Tracing - optional, using our custom logger instead
-    // For now, initialize our file logger
-    Logger::GetInstance().Initialize(L"C:\\Logs\\VirtualPrinterDriver.log");
+    // Initialize file logger with dynamically constructed path
+    WCHAR logPath[MAX_PATH];
+    DWORD result = GetEnvironmentVariableW(L"SystemDrive", logPath, MAX_PATH);
+    if (result > 0 && result < MAX_PATH) {
+        wcscat_s(logPath, L"\\Logs");
+    // Create directory if it doesn't exist
+        CreateDirectoryW(logPath, NULL);
+  wcscat_s(logPath, L"\\VirtualPrinterDriver.log");
+    } else {
+        // Fallback to C: drive if environment variable fails
+        wcscpy_s(logPath, L"C:\\Logs");
+        CreateDirectoryW(logPath, NULL);
+     wcscat_s(logPath, L"\\VirtualPrinterDriver.log");
+    }
+    
+    Logger::GetInstance().Initialize(logPath);
     Logger::GetInstance().LogInfo(L"DriverEntry called");
 
     // Initialize driver config
@@ -28,21 +41,22 @@ DriverEntry(
     attributes.EvtCleanupCallback = EvtDriverContextCleanup;
 
     status = WdfDriverCreate(
-        DriverObject,
+     DriverObject,
         RegistryPath,
-        &attributes,
-        &config,
-    WDF_NO_HANDLE
+   &attributes,
+      &config,
+ WDF_NO_HANDLE
     );
 
-    if (!NT_SUCCESS(status))
+  if (!NT_SUCCESS(status))
     {
         Logger::GetInstance().LogError(L"WdfDriverCreate failed with status 0x%08X", status);
         Logger::GetInstance().Cleanup();
-    return status;
+        return status;
     }
 
     Logger::GetInstance().LogInfo(L"Driver created successfully");
+    Logger::GetInstance().LogInfo(L"Log path: %s", logPath);
 
     return status;
 }

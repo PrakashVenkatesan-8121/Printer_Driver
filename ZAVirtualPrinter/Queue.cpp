@@ -96,41 +96,68 @@ EvtIoWrite(
         Request,
         1,  // Minimum required size
         &buffer,
-        &bufferLength
+      &bufferLength
     );
 
     if (NT_SUCCESS(status))
     {
+        // Validate buffer
+        if (buffer == nullptr || bufferLength == 0)
+        {
+Logger::GetInstance().LogError(L"Invalid buffer: NULL or zero length");
+   WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
+            return;
+        }
+
+        // Validate buffer size (max 100MB to prevent memory issues)
+    const size_t MAX_PRINT_JOB_SIZE = 100 * 1024 * 1024;
+   if (bufferLength > MAX_PRINT_JOB_SIZE)
+        {
+        Logger::GetInstance().LogError(
+          L"Print job too large: %Iu bytes (max %Iu bytes)",
+       bufferLength,
+     MAX_PRINT_JOB_SIZE
+            );
+  WdfRequestComplete(Request, STATUS_INVALID_BUFFER_SIZE);
+ return;
+        }
+
         // Increment job counter
-        g_PrintJobCounter++;
+   g_PrintJobCounter++;
+
+        // TODO: Parse print spool format (EMF/XPS/PDF) to extract actual page and copy counts
+      // For now, use defaults
+ ULONG estimatedPages = (ULONG)((bufferLength / (1024 * 50)) + 1); // Rough estimate: 50KB per page
+        ULONG copies = 1;
 
         // Log the print job information
-        Logger::GetInstance().LogPrintJob(
-            L"Print Job",
-        g_PrintJobCounter,
-        1,  // Pages - would need to parse print data to get actual count
-    1   // Copies - would need to parse print data to get actual count
-      );
+   Logger::GetInstance().LogPrintJob(
+     L"Print Job",
+            g_PrintJobCounter,
+     estimatedPages,
+            copies
+     );
 
         Logger::GetInstance().LogInfo(
-   L"Print data received - Job #%lu, Size: %Iu bytes",
-         g_PrintJobCounter,
-    bufferLength
-        );
+            L"Print data received - Job #%lu, Size: %Iu bytes, Est. Pages: %lu",
+            g_PrintJobCounter,
+            bufferLength,
+       estimatedPages
+  );
 
-        // Optionally, you could save the print data to a file here
-        // For now, we just log it and acknowledge receipt
+        // Optionally, save print data to file for debugging
+      // SavePrintJobToFile(g_PrintJobCounter, buffer, bufferLength);
 
- // Complete the write request successfully
-        WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, bufferLength);
+        // Complete the write request successfully
+      WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, bufferLength);
     }
     else
     {
  Logger::GetInstance().LogError(
-            L"Failed to retrieve input buffer, status: 0x%08X",
-            status
+    L"Failed to retrieve input buffer, status: 0x%08X",
+ status
         );
 
-        WdfRequestComplete(Request, status);
+ WdfRequestComplete(Request, status);
     }
 }

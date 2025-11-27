@@ -84,6 +84,12 @@ UmdfDirectHardwareAccess = AllowDirectHardwareAccess
 [ZAVirtualPrinter_Install]
 UmdfLibraryVersion = 2.15.0
 ServiceBinary = %13%\ZAVirtualPrinter.dll
+AddReg = ZAVirtualPrinter_AddReg
+
+[ZAVirtualPrinter_AddReg]
+HKR,"Parameters","LogPath",0x00000000,"%%SystemDrive%%\Logs\VirtualPrinterDriver.log"
+HKR,"Parameters","MaxLogSizeMB",0x00010001,10
+HKR,"Parameters","EnableDebugLogging",0x00010001,1
 
 [DestinationDirs]
 DefaultDestDir = 13
